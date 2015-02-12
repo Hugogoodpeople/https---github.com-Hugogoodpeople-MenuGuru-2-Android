@@ -4,11 +4,15 @@ package pt.menuguru.menuguru2;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -344,6 +348,13 @@ public class MainActivity extends Activity {
 
             rating.setRating( Float.parseFloat(some_array[position].mediarating));
 
+
+            TextView cifroes = (TextView)row.findViewById(R.id.main_cell_cifroes);
+
+            Spannable wordtoSpan = new SpannableString("€ € € € €");
+            wordtoSpan.setSpan(new ForegroundColorSpan(Color.parseColor("#333333")), 0, Integer.parseInt(some_array[position].precoMedio), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+            cifroes.setText(wordtoSpan);
 
             return row;
         }
