@@ -12,6 +12,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcel;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -62,6 +63,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         //executarWebservice();
+        incicializarGPS();
     }
 
     public void incicializarGPS()
@@ -113,7 +115,7 @@ public class MainActivity extends Activity {
     @Override
     public void onResume() {
         super.onResume();  // Always call the superclass method first
-        incicializarGPS();
+        //incicializarGPS();
     }
 
     public void executarWebservice()
@@ -148,7 +150,8 @@ public class MainActivity extends Activity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_settings)
+        {
             return true;
         }
 
@@ -243,7 +246,7 @@ public class MainActivity extends Activity {
                     rest.votacoes = c.getString("votacoes");
                     //rest.morada = c.getString("morada");
                     //rest.precoMedio = c.getString("precomedio");
-
+                    rest.db_id = c.getString("id");
 
 
                     rest.latitude = c.getString("lat");
@@ -303,13 +306,19 @@ public class MainActivity extends Activity {
             {
                 Log.v("clicado","Restaurante clicado = "+ some_array[i].nome);
 
-                // é aqui que tenho de abrir os restaurantes
-                Intent myIntent = new Intent(getApplicationContext(), PaginaRestaurante.class);
-
-                getApplicationContext().startActivity(myIntent);
+                abrirRestaurante(some_array[i]);
             }
         });
 
+    }
+
+    public void abrirRestaurante(Restaurante restaurante)
+    {
+        // é aqui que tenho de abrir os restaurantes
+        Intent intent = new Intent(this, PaginaRestaurante.class);
+        intent.putExtra("restaurante", restaurante);
+
+        startActivity(intent);
     }
 
     public class MyListAdapter extends ArrayAdapter<Restaurante> {
