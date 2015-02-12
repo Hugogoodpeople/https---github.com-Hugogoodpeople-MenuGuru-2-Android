@@ -1,0 +1,48 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="@android:style/Theme.Holo.Light">
+        <!--<item name="android:actionBarStyle">@style/MyTheme.ActionBarStyle</item>-->
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+    </style>
+
+    <!-- Tipo de letra -->
+    <style name="MyTheme.ActionBar.TitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">#333333</item>
+    </style>
+
+
+    <!-- Onde mudo a cor de fundo da action bar e escolho o tipo de letra -->
+    <style name="MyActionBar" parent="android:Widget.Holo.ActionBar">
+        <item name="android:background">#FFFFFF</item>
+        <item name="android:titleTextStyle">@style/MyTheme.ActionBar.TitleTextStyle</item>
+    </style>
+
+
+    <!-- estilos para as estrelas que aparecem por toda a aplicação -->
+    <style name="foodRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/food_rating_bar_full</item>
+        <item name="android:minHeight">25dip</item>
+        <item name="android:maxHeight">25dip</item>
+    </style>
+
+
+    <style name="CustomRatingBarBig" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/custom_ratingbar</item>
+        <item name="android:minHeight">41dip</item>
+        <item name="android:maxHeight">41dip</item>
+    </style>
+    <style name="CustomRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/custom_ratingbar</item>
+        <item name="android:minHeight">40dip</item>
+        <item name="android:maxHeight">40dip</item>
+    </style>
+
+    <style name="CustomRatingBarGrande" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/custom_ratingbargrande</item>
+        <item name="android:minHeight">50dip</item>
+        <item name="android:maxHeight">300dip</item>
+    </style>
+
+
+</resources>

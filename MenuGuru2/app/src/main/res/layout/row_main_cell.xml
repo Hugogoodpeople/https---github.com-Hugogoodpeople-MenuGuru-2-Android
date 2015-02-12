@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffe1e0e1">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/layout_bg"
+        >
+
+        <com.makeramen.RoundedImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="fill_parent"
+            android:layout_height="175dp"
+            android:id="@+id/main_cell_img"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:scaleType="centerCrop"
+            app:riv_corner_radius="10dip"
+            app:riv_border_width="0dip"
+            app:riv_border_color="#333333"
+            app:riv_mutate_background="true"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Cozinhas"
+            android:id="@+id/main_cell_cozinha"
+            android:layout_below="@+id/main_cell_img"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:textSize="9dp"
+            android:textColor="#ff333333" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Nome restaurante"
+            android:id="@+id/main_cell_nome_rest"
+            android:layout_below="@+id/main_cell_cozinha"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="15dp"
+            android:textSize="19dp"
+            android:layout_marginTop="5dp"
+            android:textColor="#ff333333" />
+
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="60px"
+            android:id="@+id/main_ratingBar"
+            android:rating="2.5"
+            android:stepSize="0.5"
+            android:numStars="5"
+            style="@style/CustomRatingBar"
+            android:layout_below="@+id/main_cell_nome_rest"
+            android:layout_alignLeft="@+id/main_cell_nome_rest"
+            android:layout_alignStart="@+id/main_cell_nome_rest"
+            android:layout_marginTop="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="(Avaliações)"
+            android:id="@+id/main_cell_votos"
+            android:layout_below="@+id/main_cell_nome_rest"
+            android:layout_toRightOf="@+id/main_ratingBar"
+            android:layout_toEndOf="@+id/main_ratingBar"
+            android:textSize="8dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginLeft="5dp"
+            android:textColor="#ff666666" />
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="25dp"
+            android:id="@+id/imageView2"
+            android:layout_below="@+id/main_cell_votos"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/icolocal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Cidade"
+            android:id="@+id/main_cell_cidade"
+            android:layout_alignTop="@+id/imageView2"
+            android:layout_toRightOf="@+id/imageView2"
+            android:layout_toEndOf="@+id/imageView2"
+            android:layout_marginLeft="5dp"
+            android:textSize="9dp"
+            android:textColor="#ff333333" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Morada"
+            android:id="@+id/main_cell_morada"
+            android:layout_below="@+id/main_cell_cidade"
+            android:layout_alignLeft="@+id/main_cell_cidade"
+            android:layout_alignStart="@+id/main_cell_cidade"
+            android:textSize="9dp"
+            android:textColor="#ff666666"
+            android:layout_toStartOf="@+id/main_cell_cifroes"
+            android:layout_toLeftOf="@+id/main_cell_cifroes"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="€ € € € €"
+            android:id="@+id/main_cell_cifroes"
+            android:layout_alignBottom="@+id/imageView2"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="15dp" />
+
+
+    </RelativeLayout>
+</RelativeLayout>
