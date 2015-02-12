@@ -4,6 +4,8 @@ package pt.menuguru.menuguru2;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
@@ -21,6 +23,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -34,6 +37,8 @@ import org.json.JSONObject;
 import Json_parser.JSONParser;
 import Utils.ImageLoader;
 import Utils.Restaurante;
+
+
 
 
 public class MainActivity extends Activity {
@@ -73,7 +78,6 @@ public class MainActivity extends Activity {
                 // Called when a new location is found by the network location provider.
                 // aqui so devia de fazer um pedido mas faz vario n sei
                 makeUseOfNewLocation(location);
-
             }
 
             public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -170,7 +174,8 @@ public class MainActivity extends Activity {
         }
 
         @Override
-        protected void onPreExecute() {
+        protected void onPreExecute()
+        {
             super.onPreExecute();
             progressDialog = new ProgressDialog(MainActivity.this);
             progressDialog.setCancelable(false);
@@ -277,7 +282,7 @@ public class MainActivity extends Activity {
 
     }
 
-    public void asyncComplete(boolean success){
+    public void asyncComplete(boolean success) {
 
 
         // para defenir o layout das celulas
@@ -291,8 +296,21 @@ public class MainActivity extends Activity {
         // Assign adapter to ListView
         mListView.setAdapter(mAdapter);
 
-    }
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+            {
+                Log.v("clicado","Restaurante clicado = "+ some_array[i].nome);
+
+                // é aqui que tenho de abrir os restaurantes
+                Intent myIntent = new Intent(getApplicationContext(), PaginaRestaurante.class);
+
+                getApplicationContext().startActivity(myIntent);
+            }
+        });
+
+    }
 
     public class MyListAdapter extends ArrayAdapter<Restaurante> {
 

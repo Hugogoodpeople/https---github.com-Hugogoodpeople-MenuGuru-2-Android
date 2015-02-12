@@ -25,4 +25,7 @@ dependencies {
 
     // para cantos arredondados
     compile 'com.makeramen:roundedimageview:1.5.0'
+
+    // para o facebook
+    compile 'com.facebook.android:facebook-android-sdk:3.21.1'
 }
