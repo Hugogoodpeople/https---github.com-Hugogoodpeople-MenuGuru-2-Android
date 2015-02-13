@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="pt.menuguru.menuguru2.PaginaRestaurante">
+    tools:context="pt.menuguru.menuguru2.PaginaRestaurante"
+    android:background="@android:color/white">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -88,7 +89,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:id="@+id/imageView4"
-                    android:background="#3f000000"
+                    android:background="@drawable/ic_icorestshare3"
                     android:layout_below="@+id/rest_estrelas"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
@@ -119,7 +120,7 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:id="@+id/imageView5"
-                        android:background="#4bffffff"
+                        android:background="@drawable/ic_icorestpoint"
                         android:layout_centerVertical="true"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
@@ -139,7 +140,7 @@
 
                     <TextView
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="20dp"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:text="Morada"
                         android:id="@+id/rest_morada"
@@ -293,6 +294,17 @@
 
                     </RelativeLayout>
                 </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <ListView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lista_especiais" />
             </LinearLayout>
 
         </LinearLayout>

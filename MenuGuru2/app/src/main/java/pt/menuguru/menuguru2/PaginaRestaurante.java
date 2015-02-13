@@ -38,6 +38,7 @@ import org.json.JSONObject;
 
 import Json_parser.JSONParser;
 import Utils.ImageLoader;
+import Utils.Menu_Especial;
 import Utils.ObjectInfoRest;
 import Utils.Restaurante;
 
@@ -51,6 +52,7 @@ public class PaginaRestaurante extends Activity
     public Restaurante restaurante;
     public ObjectInfoRest[] array_info =  null;
     public String[]         array_fotos = null;
+    public Menu_Especial[]  array_especiais = null;
 
     // para o loading
     private ProgressDialog progressDialog;
@@ -435,19 +437,7 @@ public class PaginaRestaurante extends Activity
             this.delegate = delegate;
         }
 
-        @Override
-        protected void onPreExecute()
-        {
-            super.onPreExecute();
-            /*
-            progressDialog = new ProgressDialog(PaginaRestaurante.this);
-            progressDialog.setCancelable(false);
-            progressDialog.setMessage("Loading...");
-            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            progressDialog.setProgress(0);
-            progressDialog.show();
-            */
-        }
+
 
         @Override
         protected String doInBackground(String... arg0) {
@@ -525,5 +515,108 @@ public class PaginaRestaurante extends Activity
         if (array_fotos.length > 4)
             imageLoader.DisplayImage("http://menuguru.pt/"+array_fotos[4], icon5);
     }
+
+
+
+
+    // os menus especiais pertencentes a este restaurante
+    // parte onde se realiza o pedido e a receção dos webservices
+    // you can make this class as another java file so it will be separated from your main activity.
+    public class webserviceMenusEspeciais extends AsyncTask<String, String, String> {
+
+        final String TAG = "AsyncTaskParseJson.java";
+
+
+        String yourJsonStringUrl = "http://menuguru.pt/menuguru2/json_galeria_fotos_restaurante.php";
+
+        // contacts JSONArray
+        JSONArray dataJsonArr = null;
+
+        private PaginaRestaurante delegate;
+
+        public webserviceMenusEspeciais (PaginaRestaurante delegate){
+            this.delegate = delegate;
+        }
+
+
+
+        @Override
+        protected String doInBackground(String... arg0) {
+
+            try {
+
+                // instantiate our json parser
+                JSONParser jParser = new JSONParser();
+
+                // get json string from url
+                // tenho de criar um jsonobject e adicionar la as cenas
+                JSONObject dict = new JSONObject();
+                JSONObject jsonObj = new JSONObject();
+
+
+                dict.put("id_rest",restaurante.db_id);
+
+
+                String jsonString = jParser.getJSONFromUrl(yourJsonStringUrl,dict);
+
+                // try parse the string to a JSON object
+                try {
+                    Log.v("Ver Json ", "Ele retorna isto" + jsonString);
+                    jsonObj = new JSONObject(jsonString);
+                } catch (JSONException e) {
+                    Log.e(TAG, "Error parsing data " + e.toString());
+                }
+                // get the array of users
+
+                dataJsonArr = jsonObj.getJSONArray("res");
+                // loop through all users
+
+
+                array_especiais = new Menu_Especial[dataJsonArr.length()];
+                for (int i = 0; i < dataJsonArr.length(); i++) {
+
+                    JSONObject c = dataJsonArr.getJSONObject(i);
+
+                    Menu_Especial especial = new Menu_Especial();
+                    especial.setId(c.getString("id"));
+                    especial.setNome(c.getString("nome"));
+                    especial.setImagem(c.getString("imagem"));
+                    especial.setPreco_actual(c.getString("preco_actual"));
+                    especial.setPreco_ant(c.getString("preco_antigo"));
+                    especial.setDescricao(c.getString("descricao"));
+                    especial.setDestaque(c.getString("destaque"));
+
+                    /*
+                    os que ficaram por colocar pk nao me lembro para que serviam
+                    menu.acerca         = [dict objectForKey:@"acerca"];
+                    menu.condicoes      = [dict objectForKey:@"condicoes"];
+                    menu.descricao2     = [dict objectForKey:@"descricao2"];
+                    */
+
+                    array_especiais[i] = especial;
+
+                }
+
+                //  Log.v("sdffgddvsdsv","objecto especial = "+ jsonObj);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String strFromDoInBg){ delegate.asyncCompleteEspeciais(true);  }
+
+    }
+
+    public void asyncCompleteEspeciais(boolean success)
+    {
+
+        // tenho de instanciar aqui o adapter e a lista para visualizar os menus especiais
+
+    }
+
 
 }
