@@ -3,139 +3,299 @@
     android:layout_height="match_parent"
     tools:context="pt.menuguru.menuguru2.PaginaRestaurante">
 
-    <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="175dp"
-        android:id="@+id/rest_imagem"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:background="#5a000000"
-        android:scaleType="centerCrop" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Cozinhas"
-        android:id="@+id/rest_cozinhas"
-        android:layout_below="@+id/rest_imagem"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="10dp" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Nome restaurante"
-        android:id="@+id/rest_nome"
-        android:layout_below="@+id/rest_cozinhas"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="15dp" />
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="175dp"
+                android:id="@+id/rest_imagem"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:background="#5a000000"
+                android:scaleType="centerCrop" />
 
-    <RatingBar
-        style="@style/CustomRatingBar"
-        android:layout_width="wrap_content"
-        android:layout_height="60px"
-        android:id="@+id/rest_estrelas"
-        android:rating="2.5"
-        android:stepSize="0.5"
-        android:numStars="5"
-        android:layout_below="@+id/rest_nome"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="15dp" />
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
 
-    <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:id="@+id/imageView3"
-        android:background="@drawable/icicorestgarfo"
-        android:layout_alignTop="@+id/imageView4"
-        android:layout_alignLeft="@+id/relativeLayout"
-        android:layout_alignStart="@+id/relativeLayout"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="15dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Cozinhas"
+                    android:id="@+id/rest_cozinhas"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Ver menus"
-        android:id="@+id/textView3"
-        android:gravity="center_vertical"
-        android:layout_alignTop="@+id/imageView3"
-        android:layout_toRightOf="@+id/imageView3"
-        android:layout_alignBottom="@+id/imageView3"
-        android:layout_marginLeft="15dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Nome restaurante"
+                    android:id="@+id/rest_nome"
+                    android:layout_below="@+id/rest_cozinhas"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="15dp" />
 
-    <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:id="@+id/imageView4"
-        android:background="#3f000000"
-        android:layout_below="@+id/rest_estrelas"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="15dp" />
+                <RatingBar
+                    style="@style/CustomRatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60px"
+                    android:id="@+id/rest_estrelas"
+                    android:rating="2.5"
+                    android:stepSize="0.5"
+                    android:numStars="5"
+                    android:layout_below="@+id/rest_nome"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="15dp" />
 
-    <RelativeLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="60dp"
-        android:layout_below="@+id/imageView3"
-        android:background="#ff28384b"
-        android:layout_alignLeft="@+id/rest_imagem"
-        android:layout_alignStart="@+id/rest_imagem"
-        android:id="@+id/relativeLayout">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/imageView3"
+                    android:background="@drawable/icicorestgarfo"
+                    android:layout_alignTop="@+id/imageView4"
+                    android:layout_alignLeft="@+id/relativeLayout"
+                    android:layout_alignStart="@+id/relativeLayout"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="15dp" />
 
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:id="@+id/imageView5"
-            android:background="#4bffffff"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="15dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Ver menus"
+                    android:id="@+id/textView3"
+                    android:gravity="center_vertical"
+                    android:layout_alignTop="@+id/imageView3"
+                    android:layout_toRightOf="@+id/imageView3"
+                    android:layout_alignBottom="@+id/imageView3"
+                    android:layout_marginLeft="15dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Cidade"
-            android:id="@+id/rest_cidade"
-            android:layout_alignTop="@+id/imageView5"
-            android:layout_toRightOf="@+id/imageView5"
-            android:layout_toEndOf="@+id/imageView5"
-            android:textColor="@android:color/white"
-            android:layout_marginLeft="10dp" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/imageView4"
+                    android:background="#3f000000"
+                    android:layout_below="@+id/rest_estrelas"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Morada"
-            android:id="@+id/rest_morada"
-            android:textColor="@android:color/white"
-            android:layout_alignBottom="@+id/imageView5"
-            android:layout_toRightOf="@+id/imageView5"
-            android:layout_toEndOf="@+id/imageView5"
-            android:layout_marginLeft="10dp" />
-    </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="( votos )"
+                    android:id="@+id/rest_votos"
+                    android:layout_below="@+id/rest_nome"
+                    android:layout_toRightOf="@+id/rest_estrelas"
+                    android:layout_toEndOf="@+id/rest_estrelas"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="3dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="( votos )"
-        android:id="@+id/rest_votos"
-        android:layout_below="@+id/rest_nome"
-        android:layout_toRightOf="@+id/rest_estrelas"
-        android:layout_toEndOf="@+id/rest_estrelas"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="3dp" />
+                <RelativeLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="60dp"
+                    android:layout_below="@+id/imageView3"
+                    android:background="#ff28384b"
+                    android:id="@+id/relativeLayout">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:id="@+id/imageView5"
+                        android:background="#4bffffff"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginLeft="15dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="Cidade"
+                        android:id="@+id/rest_cidade"
+                        android:layout_alignTop="@+id/imageView5"
+                        android:layout_toRightOf="@+id/imageView5"
+                        android:layout_toEndOf="@+id/imageView5"
+                        android:textColor="@android:color/white"
+                        android:layout_marginLeft="10dp" />
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="Morada"
+                        android:id="@+id/rest_morada"
+                        android:textColor="@android:color/white"
+                        android:layout_alignBottom="@+id/imageView5"
+                        android:layout_toRightOf="@+id/imageView5"
+                        android:layout_toEndOf="@+id/imageView5"
+                        android:layout_marginLeft="10dp" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <ListView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lista_info"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:dividerHeight="0dp"
+                android:divider="@null"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true">
+
+                    <RelativeLayout
+                        android:id="@+id/view_button_info"
+                        android:layout_width="fill_parent"
+                        android:layout_height="60dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true">
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ver mais"
+                            android:id="@+id/button_info"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:background="#ff29384a"
+                            android:textColor="@android:color/white"
+                            android:width="120dp"
+                            android:layout_marginLeft="15dp" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="100dp"
+                        android:layout_below="@+id/view_button_info"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="Fotografias"
+                            android:id="@+id/textView"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginLeft="15dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginTop="10dp" />
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/textView"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="55dp"
+                                android:layout_height="55dp"
+                                android:id="@+id/gal_foto1"
+                                android:background="#00000000"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:scaleType="centerCrop"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:layout_marginRight="5dp" />
+
+                            <ImageView
+                                android:layout_width="55dp"
+                                android:layout_height="55dp"
+                                android:id="@+id/gal_foto2"
+                                android:background="#00000000"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:scaleType="centerCrop"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:layout_marginRight="5dp" />
+
+                            <ImageView
+                                android:layout_width="55dp"
+                                android:layout_height="55dp"
+                                android:id="@+id/gal_foto3"
+                                android:background="#00000000"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:scaleType="centerCrop"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:layout_marginRight="5dp" />
+
+                            <ImageView
+                                android:layout_width="55dp"
+                                android:layout_height="55dp"
+                                android:id="@+id/gal_foto4"
+                                android:background="#00000000"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:scaleType="centerCrop"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:layout_marginRight="5dp" />
+
+                            <ImageView
+                                android:layout_width="55dp"
+                                android:layout_height="55dp"
+                                android:id="@+id/gal_foto5"
+                                android:background="#00000000"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:scaleType="centerCrop"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:layout_marginRight="15dp"
+                                android:layout_marginLeft="5dp" />
+                        </LinearLayout>
+
+                    </RelativeLayout>
+                </RelativeLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
 </RelativeLayout>
