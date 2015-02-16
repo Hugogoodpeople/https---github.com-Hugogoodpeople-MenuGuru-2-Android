@@ -14,6 +14,124 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
 
+            <RelativeLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="175dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="AVALIAÇÕES"
+                    android:id="@+id/rest_avalicoes_nome_rest"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="10dp" />
+
+                <RatingBar
+                    style="@style/CustomRatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ratingBar2"
+                    android:rating="2.5"
+                    android:stepSize="0.5"
+                    android:numStars="5"
+                    android:layout_below="@+id/textView9"
+                    android:layout_toRightOf="@+id/rest_avalicoes_nome_rest"
+                    android:layout_toEndOf="@+id/rest_avalicoes_nome_rest" />
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="3.5"
+                    android:id="@+id/rest_media_rating"
+                    android:layout_below="@+id/rest_avalicoes_nome_rest"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:gravity="center"
+                    android:layout_marginLeft="15dp"
+                    android:layout_alignBottom="@+id/ratingBar2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Classificação geral"
+                    android:id="@+id/textView9"
+                    android:layout_below="@+id/rest_avalicoes_nome_rest"
+                    android:layout_alignLeft="@+id/ratingBar2"
+                    android:layout_alignStart="@+id/ratingBar2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Comida"
+                    android:id="@+id/textView10"
+                    android:layout_below="@+id/ratingBar2"
+                    android:layout_alignLeft="@+id/rest_media_rating"
+                    android:layout_alignStart="@+id/rest_media_rating" />
+
+                <RatingBar
+                    style="@style/CustomRatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ratingBar3"
+                    android:rating="2.5"
+                    android:stepSize="0.5"
+                    android:numStars="5"
+                    android:layout_below="@+id/textView10"
+                    android:layout_alignLeft="@+id/textView10"
+                    android:layout_alignStart="@+id/textView10" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Serviço"
+                    android:id="@+id/textView11"
+                    android:layout_below="@+id/ratingBar2"
+                    android:layout_centerHorizontal="true" />
+
+                <RatingBar
+                    style="@style/CustomRatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ratingBar4"
+                    android:rating="2.5"
+                    android:stepSize="0.5"
+                    android:numStars="5"
+                    android:layout_below="@+id/textView11"
+                    android:layout_alignLeft="@+id/textView11"
+                    android:layout_alignStart="@+id/textView11" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Ambiente"
+                    android:id="@+id/textView12"
+                    android:layout_below="@+id/ratingBar2"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="15dp" />
+
+                <RatingBar
+                    style="@style/CustomRatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ratingBar5"
+                    android:rating="2.5"
+                    android:stepSize="0.5"
+                    android:numStars="5"
+                    android:layout_below="@+id/textView12"
+                    android:layout_alignLeft="@+id/textView12"
+                    android:layout_alignStart="@+id/textView12" />
+            </RelativeLayout>
+
             <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="175dp"
@@ -154,7 +272,7 @@
 
             <ListView
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 android:id="@+id/lista_info"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
@@ -305,6 +423,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/lista_especiais" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <ListView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lista_comentarios" />
             </LinearLayout>
 
         </LinearLayout>

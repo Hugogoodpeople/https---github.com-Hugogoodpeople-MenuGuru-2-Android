@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -65,8 +66,12 @@ public class PaginaRestaurante extends Activity
 
     // para a tabela do info
     private ListView listViewInfo;
-
     private static AdapterInfo adapterInfo;
+
+    // para a tabela especiais
+    private ListView listViewEspeciais;
+    private static AdapterEspeciais adapterEspeciais;
+
     public Boolean toogleInfo = false;
 
 
@@ -123,6 +128,7 @@ public class PaginaRestaurante extends Activity
 
         new WebserviceInfo(this).execute();
         new webserviceFotos(this).execute();
+        new webserviceMenusEspeciais(this).execute();
     }
 
     @Override
@@ -321,10 +327,7 @@ public class PaginaRestaurante extends Activity
     // como a lista esta dentro de uma scroll view ela tem um bug de nao esticar correctamente
     public static void setListViewHeightBasedOnChildren(ListView listView) {
         ListAdapter listAdapter = listView.getAdapter();
-        if (listAdapter == null) {
-            // pre-condition
-            return;
-        }
+
 
         int totalHeight = listView.getPaddingTop() + listView.getPaddingBottom();
         int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.AT_MOST);
@@ -527,7 +530,7 @@ public class PaginaRestaurante extends Activity
         final String TAG = "AsyncTaskParseJson.java";
 
 
-        String yourJsonStringUrl = "http://menuguru.pt/menuguru2/json_galeria_fotos_restaurante.php";
+        String yourJsonStringUrl = "http://menuguru.pt/menuguru2/json_menus_especiais_restaurante.php";
 
         // contacts JSONArray
         JSONArray dataJsonArr = null;
@@ -573,7 +576,8 @@ public class PaginaRestaurante extends Activity
 
 
                 array_especiais = new Menu_Especial[dataJsonArr.length()];
-                for (int i = 0; i < dataJsonArr.length(); i++) {
+                for (int i = 0; i < dataJsonArr.length(); i++)
+                {
 
                     JSONObject c = dataJsonArr.getJSONObject(i);
 
@@ -581,20 +585,21 @@ public class PaginaRestaurante extends Activity
                     especial.setId(c.getString("id"));
                     especial.setNome(c.getString("nome"));
                     especial.setImagem(c.getString("imagem"));
-                    especial.setPreco_actual(c.getString("preco_actual"));
+                    especial.setPreco_actual(c.getString("preco_atual"));
                     especial.setPreco_ant(c.getString("preco_antigo"));
                     especial.setDescricao(c.getString("descricao"));
                     especial.setDestaque(c.getString("destaque"));
-
-                    /*
-                    os que ficaram por colocar pk nao me lembro para que serviam
-                    menu.acerca         = [dict objectForKey:@"acerca"];
-                    menu.condicoes      = [dict objectForKey:@"condicoes"];
-                    menu.descricao2     = [dict objectForKey:@"descricao2"];
-                    */
+                    especial.setDataActual(c.getString("data_inicio"));
+                    especial.setDatafinal(c.getString("data_fim"));
+                    especial.setDestaque(c.getString("destaque"));
+                    especial.setDesconto(c.getString("desconto"));
+                    especial.setAcerca(c.getString("acerca"));
+                    especial.setCondicoes(c.getString("condicoes"));
+                    especial.setDescricao2(c.getString("descricao2"));
+                    especial.setDescricao(c.getString("descricao"));
+                    especial.setTipo(c.getString("tipo"));
 
                     array_especiais[i] = especial;
-
                 }
 
                 //  Log.v("sdffgddvsdsv","objecto especial = "+ jsonObj);
@@ -615,6 +620,65 @@ public class PaginaRestaurante extends Activity
     {
 
         // tenho de instanciar aqui o adapter e a lista para visualizar os menus especiais
+
+        // tenho de preencher os dados da tabela info aqui :p
+
+        // para defenir o layout das celulas
+        listViewEspeciais = (ListView) findViewById(R.id.lista_especiais);
+
+
+        // para defenir quando a lista esta vazia
+        // listViewInfo.setEmptyView(findViewById(R.id.empty_list_main));
+
+        adapterEspeciais = new AdapterEspeciais(this, R.layout.row_menu_especial, array_especiais);
+        // Assign adapter to ListView
+        listViewEspeciais.setAdapter(adapterEspeciais);
+
+        setListViewHeightBasedOnChildren(listViewEspeciais);
+    }
+
+
+    public class AdapterEspeciais extends ArrayAdapter<Menu_Especial> {
+
+        Context myContext;
+        public ImageLoader imageLoader;
+
+        public AdapterEspeciais(Context context, int textViewResourceId, Menu_Especial[] objects)
+        {
+            super(context, textViewResourceId, objects);
+            imageLoader = new ImageLoader(context);
+            myContext = context;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            //return super.getView(position, convertView, parent);
+
+            LayoutInflater inflater =(LayoutInflater)myContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            //View row = null;
+            View row = inflater.inflate(R.layout.row_menu_especial, parent, false);
+
+            TextView label1 = (TextView)row.findViewById(R.id.especial_titulo);
+            label1.setText(array_especiais[position].getNome());
+
+            TextView label2 = (TextView)row.findViewById(R.id.especial_preco_antigo);
+            label2.setPaintFlags(label2.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            label2.setText(array_especiais[position].getPreco_ant());
+
+            TextView label3 = (TextView)row.findViewById(R.id.especial_preco_novo);
+            label3.setText(array_especiais[position].getPreco_actual());
+
+            TextView label4=(TextView)row.findViewById(R.id.especial_desconto);
+            label4.setText(array_especiais[position].getDescricao());
+
+            ImageView icon=(ImageView)row.findViewById(R.id.especial_imagem);
+            imageLoader.DisplayImage("http://menuguru.pt/"+(array_especiais[position].getImagem()), icon);
+
+            // tenho de adicionar um botao que ao ser clicado tem de abrir o cenas de fazer reservas
+
+
+            return row;
+        }
 
     }
 
