@@ -1,12 +1,13 @@
 package Utils;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+
+
+import java.io.Serializable;
 
 /**
  * Created by hugocosta on 12/08/14.
  */
-public class Restaurante  implements Parcelable {
+public class Restaurante  implements Serializable {
 
     public String nome= " ";
     public String db_id= " ";
@@ -138,15 +139,13 @@ public class Restaurante  implements Parcelable {
         this.mediarating = mediarating;
     }
 
+    /*
     @Override
-    public int describeContents() {
-        return 0;
+    public String toString()
+    {
+        return "Person [nome=" + nome + ", db_id=" + db_id + "]";
     }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-
-    }
+    */
 }
 
 

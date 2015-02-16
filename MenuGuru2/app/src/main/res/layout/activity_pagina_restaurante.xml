@@ -1,12 +1,448 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="pt.menuguru.menuguru2.PaginaRestaurante">
+    android:layout_height="match_parent"
+    tools:context="pt.menuguru.menuguru2.PaginaRestaurante"
+    android:background="@android:color/white">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <RelativeLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="175dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="AVALIAÇÕES"
+                    android:id="@+id/aval_nome_rest"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp" />
+
+                <RatingBar
+                    style="@style/CustomRatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/aval_media_rating"
+                    android:rating="2.5"
+                    android:stepSize="0.5"
+                    android:numStars="5"
+                    android:layout_below="@+id/textView9"
+                    android:layout_toRightOf="@+id/aval_nome_rest"
+                    android:layout_toEndOf="@+id/aval_nome_rest"
+                    android:focusableInTouchMode="false"
+                    android:layout_marginLeft="10dp" />
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="3.5"
+                    android:id="@+id/rest_media_rating"
+                    android:layout_below="@+id/aval_nome_rest"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:gravity="center"
+                    android:layout_marginLeft="15dp"
+                    android:layout_alignBottom="@+id/aval_media_rating" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Classificação geral"
+                    android:id="@+id/textView9"
+                    android:layout_below="@+id/aval_nome_rest"
+                    android:layout_alignLeft="@+id/aval_media_rating"
+                    android:layout_alignStart="@+id/aval_media_rating" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Comida"
+                    android:id="@+id/textView10"
+                    android:layout_below="@+id/aval_media_rating"
+                    android:layout_alignLeft="@+id/rest_media_rating"
+                    android:layout_alignStart="@+id/rest_media_rating"
+                    android:layout_marginTop="20dp" />
+
+                <RatingBar
+                    style="@style/CustomRatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/aval_comida"
+                    android:rating="2.5"
+                    android:stepSize="0.5"
+                    android:numStars="5"
+                    android:layout_below="@+id/textView10"
+                    android:layout_alignLeft="@+id/textView10"
+                    android:layout_alignStart="@+id/textView10" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Serviço"
+                    android:id="@+id/textView11"
+                    android:layout_below="@+id/aval_media_rating"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp" />
+
+                <RatingBar
+                    style="@style/CustomRatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/aval_servico"
+                    android:rating="2.5"
+                    android:stepSize="0.5"
+                    android:numStars="5"
+                    android:layout_below="@+id/textView11"
+                    android:layout_alignLeft="@+id/textView11"
+                    android:layout_alignStart="@+id/textView11" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Ambiente"
+                    android:id="@+id/textView12"
+                    android:layout_below="@+id/aval_media_rating"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="20dp" />
+
+                <RatingBar
+                    style="@style/CustomRatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/aval_ambiente"
+                    android:rating="2.5"
+                    android:stepSize="0.5"
+                    android:numStars="5"
+                    android:layout_below="@+id/textView12"
+                    android:layout_alignLeft="@+id/textView12"
+                    android:layout_alignStart="@+id/textView12" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="175dp"
+                android:id="@+id/rest_imagem"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:background="#5a000000"
+                android:scaleType="centerCrop" />
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Cozinhas"
+                    android:id="@+id/rest_cozinhas"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Nome restaurante"
+                    android:id="@+id/rest_nome"
+                    android:layout_below="@+id/rest_cozinhas"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="15dp" />
+
+                <RatingBar
+                    style="@style/CustomRatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60px"
+                    android:id="@+id/rest_estrelas"
+                    android:rating="2.5"
+                    android:stepSize="0.5"
+                    android:numStars="5"
+                    android:layout_below="@+id/rest_nome"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="15dp" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/imageView3"
+                    android:background="@drawable/icicorestgarfo"
+                    android:layout_alignTop="@+id/imageView4"
+                    android:layout_alignLeft="@+id/relativeLayout"
+                    android:layout_alignStart="@+id/relativeLayout"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="15dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Ver menus"
+                    android:id="@+id/textView3"
+                    android:gravity="center_vertical"
+                    android:layout_alignTop="@+id/imageView3"
+                    android:layout_toRightOf="@+id/imageView3"
+                    android:layout_alignBottom="@+id/imageView3"
+                    android:layout_marginLeft="15dp" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/imageView4"
+                    android:background="@drawable/ic_icorestshare3"
+                    android:layout_below="@+id/rest_estrelas"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="( votos )"
+                    android:id="@+id/rest_votos"
+                    android:layout_below="@+id/rest_nome"
+                    android:layout_toRightOf="@+id/rest_estrelas"
+                    android:layout_toEndOf="@+id/rest_estrelas"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="3dp" />
+
+                <RelativeLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="60dp"
+                    android:layout_below="@+id/imageView3"
+                    android:background="#ff28384b"
+                    android:id="@+id/relativeLayout">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:id="@+id/imageView5"
+                        android:background="@drawable/ic_icorestpoint"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginLeft="15dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="Cidade"
+                        android:id="@+id/rest_cidade"
+                        android:layout_alignTop="@+id/imageView5"
+                        android:layout_toRightOf="@+id/imageView5"
+                        android:layout_toEndOf="@+id/imageView5"
+                        android:textColor="@android:color/white"
+                        android:layout_marginLeft="10dp" />
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="20dp"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="Morada"
+                        android:id="@+id/rest_morada"
+                        android:textColor="@android:color/white"
+                        android:layout_alignBottom="@+id/imageView5"
+                        android:layout_toRightOf="@+id/imageView5"
+                        android:layout_toEndOf="@+id/imageView5"
+                        android:layout_marginLeft="10dp" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <ListView
+                android:layout_width="fill_parent"
+                android:layout_height="100dp"
+                android:id="@+id/lista_info"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:dividerHeight="0dp"
+                android:divider="@null"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true">
+
+                    <RelativeLayout
+                        android:id="@+id/view_button_info"
+                        android:layout_width="fill_parent"
+                        android:layout_height="60dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true">
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ver mais"
+                            android:id="@+id/button_info"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:background="#ff29384a"
+                            android:textColor="@android:color/white"
+                            android:width="120dp"
+                            android:layout_marginLeft="15dp" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="100dp"
+                        android:layout_below="@+id/view_button_info"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="Fotografias"
+                            android:id="@+id/textView"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginLeft="15dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginTop="10dp" />
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/textView"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="55dp"
+                                android:layout_height="55dp"
+                                android:id="@+id/gal_foto1"
+                                android:background="#00000000"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:scaleType="centerCrop"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:layout_marginRight="5dp" />
+
+                            <ImageView
+                                android:layout_width="55dp"
+                                android:layout_height="55dp"
+                                android:id="@+id/gal_foto2"
+                                android:background="#00000000"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:scaleType="centerCrop"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:layout_marginRight="5dp" />
+
+                            <ImageView
+                                android:layout_width="55dp"
+                                android:layout_height="55dp"
+                                android:id="@+id/gal_foto3"
+                                android:background="#00000000"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:scaleType="centerCrop"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:layout_marginRight="5dp" />
+
+                            <ImageView
+                                android:layout_width="55dp"
+                                android:layout_height="55dp"
+                                android:id="@+id/gal_foto4"
+                                android:background="#00000000"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:scaleType="centerCrop"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:layout_marginRight="5dp" />
+
+                            <ImageView
+                                android:layout_width="55dp"
+                                android:layout_height="55dp"
+                                android:id="@+id/gal_foto5"
+                                android:background="#00000000"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:scaleType="centerCrop"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:layout_marginRight="15dp"
+                                android:layout_marginLeft="5dp" />
+                        </LinearLayout>
+
+                    </RelativeLayout>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <ListView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lista_especiais" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <ListView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lista_comentarios" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

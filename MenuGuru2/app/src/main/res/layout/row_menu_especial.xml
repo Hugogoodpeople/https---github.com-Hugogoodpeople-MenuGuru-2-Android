@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/especial_imagem"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="15dp"
+        android:background="#41000000"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/especial_titulo"
+        android:textStyle="bold"
+        android:textColor="#ff333333"
+        android:textSize="15dp"
+        android:layout_alignTop="@+id/especial_imagem"
+        android:layout_toRightOf="@+id/especial_imagem"
+        android:layout_toEndOf="@+id/especial_imagem" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/especial_preco_antigo"
+        android:textColor="#ff999999"
+        android:textSize="12dp"
+        android:layout_alignBaseline="@+id/especial_preco_novo"
+        android:layout_alignBottom="@+id/especial_preco_novo"
+        android:layout_alignLeft="@+id/especial_titulo"
+        android:layout_alignStart="@+id/especial_titulo" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/especial_preco_novo"
+        android:textStyle="bold"
+        android:textColor="#ff333333"
+        android:textSize="12dp"
+        android:layout_above="@+id/especial_desconto"
+        android:layout_toRightOf="@+id/especial_preco_antigo"
+        android:layout_toEndOf="@+id/especial_preco_antigo" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/especial_desconto"
+        android:textStyle="bold"
+        android:textColor="#ff999999"
+        android:textSize="12dp"
+        android:layout_alignBottom="@+id/especial_imagem"
+        android:layout_toRightOf="@+id/especial_imagem"
+        android:layout_toEndOf="@+id/especial_imagem" />
+
+    <Button
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:text="Reservar"
+        android:id="@+id/especial_button"
+        android:background="#d33530"
+        android:textColor="@android:color/white"
+        android:textSize="12dp"
+        android:layout_alignTop="@+id/especial_titulo"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="false"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="15dp" />
+</RelativeLayout>

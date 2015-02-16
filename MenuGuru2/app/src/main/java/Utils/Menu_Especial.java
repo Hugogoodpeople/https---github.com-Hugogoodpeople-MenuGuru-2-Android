@@ -27,6 +27,34 @@ public class Menu_Especial {
     private String dataActual;
     private String tipo;
     private String id_pai;
+    private String acerca;
+    private String condicoes;
+    private String descricao2;
+
+
+    public String getAcerca() {
+        return acerca;
+    }
+
+    public void setAcerca(String acerca) {
+        this.acerca = acerca;
+    }
+
+    public String getCondicoes() {
+        return condicoes;
+    }
+
+    public void setCondicoes(String condicoes) {
+        this.condicoes = condicoes;
+    }
+
+    public String getDescricao2() {
+        return descricao2;
+    }
+
+    public void setDescricao2(String descricao2) {
+        this.descricao2 = descricao2;
+    }
 
     public String getId_pai() { return id_pai; }
 
