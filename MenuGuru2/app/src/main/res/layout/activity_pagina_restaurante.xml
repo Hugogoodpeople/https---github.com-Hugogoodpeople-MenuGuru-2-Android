@@ -17,7 +17,7 @@
             <RelativeLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="175dp" >
+                android:layout_height="wrap_content" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -32,7 +32,7 @@
                     android:layout_marginBottom="10dp" />
 
                 <RatingBar
-                    style="@style/CustomRatingBar"
+                    style="@style/CustomRatingBarGrande"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/aval_media_rating"
@@ -55,7 +55,6 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:gravity="center"
-                    android:layout_marginLeft="15dp"
                     android:layout_alignBottom="@+id/aval_media_rating" />
 
                 <TextView
@@ -97,9 +96,8 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="Serviço"
                     android:id="@+id/textView11"
-                    android:layout_below="@+id/aval_media_rating"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="20dp" />
+                    android:layout_alignTop="@+id/textView10"
+                    android:layout_centerHorizontal="true" />
 
                 <RatingBar
                     style="@style/CustomRatingBar"
@@ -119,11 +117,9 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="Ambiente"
                     android:id="@+id/textView12"
-                    android:layout_below="@+id/aval_media_rating"
+                    android:layout_above="@+id/aval_servico"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="20dp" />
+                    android:layout_alignParentEnd="true" />
 
                 <RatingBar
                     style="@style/CustomRatingBar"
@@ -135,7 +131,8 @@
                     android:numStars="5"
                     android:layout_below="@+id/textView12"
                     android:layout_alignLeft="@+id/textView12"
-                    android:layout_alignStart="@+id/textView12" />
+                    android:layout_alignStart="@+id/textView12"
+                    android:layout_marginRight="15dp" />
             </RelativeLayout>
 
             <ImageView

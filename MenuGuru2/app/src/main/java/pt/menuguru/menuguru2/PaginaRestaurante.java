@@ -115,6 +115,16 @@ public class PaginaRestaurante extends Activity
         rating.setFocusable(false);
         rating.setRating(Float.parseFloat(rest.mediarating));
 
+        RatingBar rating1 = (RatingBar)findViewById(R.id.aval_media_rating);
+        rating1.setOnTouchListener(new View.OnTouchListener()
+        {
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
+        rating1.setFocusable(false);
+        rating1.setRating(Float.parseFloat(rest.mediarating));
+
         imageLoader = new ImageLoader(this);
 
         ImageView icon=(ImageView)findViewById(R.id.rest_imagem);
