@@ -149,6 +149,10 @@ public class MainActivity extends Activity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+
+            Intent myIntent = new Intent(this, Login.class);
+            startActivity(myIntent);
+
             return true;
         }
 

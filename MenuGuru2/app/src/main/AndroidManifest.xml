@@ -30,6 +30,14 @@
             android:name=".PaginaRestaurante"
             android:label="@string/title_activity_pagina_restaurante" >
         </activity>
+        <activity
+            android:name=".Login"
+            android:label="@string/title_activity_login" >
+        </activity>
+        <activity
+            android:name=".LoginNormal"
+            android:label="@string/title_activity_login_normal" >
+        </activity>
     </application>
 
 </manifest>
