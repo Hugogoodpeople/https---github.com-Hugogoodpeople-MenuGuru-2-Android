@@ -604,7 +604,8 @@ public class PaginaRestaurante extends Activity
 
                 //  Log.v("sdffgddvsdsv","objecto especial = "+ jsonObj);
 
-            } catch (JSONException e) {
+            } catch (JSONException e)
+            {
                 e.printStackTrace();
             }
 
