@@ -1,18 +1,12 @@
 package pt.menuguru.menuguru2;
 
-import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,8 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -38,6 +30,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import Json_parser.JSONParser;
+import Utils.Comentario;
 import Utils.ImageLoader;
 import Utils.Menu_Especial;
 import Utils.ObjectInfoRest;
@@ -54,6 +47,7 @@ public class PaginaRestaurante extends Activity
     public ObjectInfoRest[] array_info =  null;
     public String[]         array_fotos = null;
     public Menu_Especial[]  array_especiais = null;
+    public Comentario[]     array_comentarios = null;
 
     // para o loading
     private ProgressDialog progressDialog;
@@ -71,6 +65,15 @@ public class PaginaRestaurante extends Activity
     // para a tabela especiais
     private ListView listViewEspeciais;
     private static AdapterEspeciais adapterEspeciais;
+
+    // para a tabela comentarios
+    private ListView listViewComentarios;
+    private static AdapterComentarios adapterComentarios;
+
+    public String media_ambiente;
+    public String media_servico;
+    public String media_comida;
+
 
     public Boolean toogleInfo = false;
 
@@ -105,7 +108,7 @@ public class PaginaRestaurante extends Activity
         TextView textView5 = (TextView)findViewById(R.id.rest_morada);
         textView5.setText(rest.morada);
 
-        RatingBar rating = (RatingBar)findViewById(R.id.rest_estrelas);
+        RatingBar rating = (RatingBar)findViewById(R.id.row_comentario_estrela);
         rating.setOnTouchListener(new View.OnTouchListener()
         {
             public boolean onTouch(View v, MotionEvent event) {
@@ -125,6 +128,9 @@ public class PaginaRestaurante extends Activity
         rating1.setFocusable(false);
         rating1.setRating(Float.parseFloat(rest.mediarating));
 
+        TextView textView6 = (TextView)findViewById(R.id.rest_media_rating);
+        textView6.setText(rest.mediarating);
+
         imageLoader = new ImageLoader(this);
 
         ImageView icon=(ImageView)findViewById(R.id.rest_imagem);
@@ -142,6 +148,7 @@ public class PaginaRestaurante extends Activity
         new WebserviceInfo(this).execute();
         new webserviceFotos(this).execute();
         new webserviceMenusEspeciais(this).execute();
+        new webserviceComentarios(this).execute();
     }
 
     @Override
@@ -695,6 +702,180 @@ public class PaginaRestaurante extends Activity
         }
 
     }
+
+
+    // os menus especiais pertencentes a este restaurante
+    // parte onde se realiza o pedido e a receção dos webservices
+    // you can make this class as another java file so it will be separated from your main activity.
+    public class webserviceComentarios extends AsyncTask<String, String, String> {
+
+        final String TAG = "AsyncTaskParseJson.java";
+
+
+        String yourJsonStringUrl = "http://menuguru.pt/menuguru2/json_comentarios_restaurante.php";
+
+        // contacts JSONArray
+        JSONArray dataJsonArr = null;
+
+        private PaginaRestaurante delegate;
+
+        public webserviceComentarios (PaginaRestaurante delegate){
+            this.delegate = delegate;
+        }
+
+
+
+        @Override
+        protected String doInBackground(String... arg0) {
+
+            try {
+
+                // instantiate our json parser
+                JSONParser jParser = new JSONParser();
+
+                // get json string from url
+                // tenho de criar um jsonobject e adicionar la as cenas
+                JSONObject dict = new JSONObject();
+                JSONObject jsonObj = new JSONObject();
+
+
+                dict.put("id_rest",restaurante.db_id);
+
+
+                String jsonString = jParser.getJSONFromUrl(yourJsonStringUrl,dict);
+
+                // try parse the string to a JSON object
+                try {
+                    Log.v("Ver Json ", "Ele retorna comentarios" + jsonString);
+                    jsonObj = new JSONObject(jsonString);
+                } catch (JSONException e) {
+                    Log.e(TAG, "Error parsing data " + e.toString());
+                }
+                // get the array of users
+
+                dataJsonArr = jsonObj.getJSONArray("res");
+                // loop through all users
+
+
+                /*
+                media_ambiente = c.getString("media_ambiente");
+                media_comida   = c.getString("media_comida");
+                media_servico  = c.getString("media_servico");
+                */
+
+                int x = 0;
+
+                array_comentarios = new Comentario[dataJsonArr.length()];
+
+                for (int i = 0; i < dataJsonArr.length(); i++)
+                {
+
+                    JSONObject c = dataJsonArr.getJSONObject(i);
+
+                    Comentario comentario = new Comentario();
+
+                    comentario.setTitulo_comentario(c.getString("titulo"));
+                    comentario.setNome_rest_com(restaurante.nome);
+                    comentario.setData_com(c.getString("data"));
+                    comentario.setComentario(c.getString("comentario"));
+                    comentario.setMedia_coment(c.getString("rating"));
+                    comentario.setNome_user_com(c.getString("nome_utilizador"));
+
+                    array_comentarios[i] = comentario;
+
+                }
+
+
+                //  Log.v("sdffgddvsdsv","objecto especial = "+ jsonObj);
+
+            } catch (JSONException e)
+            {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String strFromDoInBg){ delegate.asyncCompleteComentarios(true);  }
+
+    }
+
+    public void asyncCompleteComentarios(Boolean success)
+    {
+
+        // tenho de instanciar aqui o adapter e a lista para visualizar os menus especiais
+
+        // tenho de preencher os dados da tabela info aqui :p
+
+        // para defenir o layout das celulas
+        listViewComentarios = (ListView) findViewById(R.id.lista_comentarios);
+
+
+        // para defenir quando a lista esta vazia
+        // listViewInfo.setEmptyView(findViewById(R.id.empty_list_main));
+
+        adapterComentarios = new AdapterComentarios(this, R.layout.row_comentario, array_comentarios);
+        // Assign adapter to ListView
+        listViewComentarios.setAdapter(adapterComentarios);
+
+        setListViewHeightBasedOnChildren(listViewComentarios);
+
+    }
+
+    public class AdapterComentarios extends ArrayAdapter<Comentario> {
+
+        Context myContext;
+        public ImageLoader imageLoader;
+
+        public AdapterComentarios(Context context, int textViewResourceId, Comentario[] objects)
+        {
+            super(context, textViewResourceId, objects);
+            imageLoader = new ImageLoader(context);
+            myContext = context;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            //return super.getView(position, convertView, parent);
+
+            LayoutInflater inflater =(LayoutInflater)myContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            //View row = null;
+            View row = inflater.inflate(R.layout.row_comentario, parent, false);
+
+
+            TextView label1 = (TextView)row.findViewById(R.id.comentario_titulo);
+            label1.setText(array_comentarios[position].getTitulo_comentario());
+
+            TextView label2 = (TextView)row.findViewById(R.id.comentario_nome_user);
+            label2.setText(array_comentarios[position].getNome_user_com());
+
+            TextView label3 = (TextView)row.findViewById(R.id.comentario_text);
+            label3.setText(array_comentarios[position].getComentario());
+
+
+            // esta data tem de estar formatada
+            TextView label4 = (TextView)row.findViewById(R.id.comentario_data);
+            label4.setText(array_comentarios[position].getData_com());
+
+
+            RatingBar rating1 = (RatingBar)row.findViewById(R.id.row_comentario_estrela);
+            rating1.setOnTouchListener(new View.OnTouchListener()
+            {
+                public boolean onTouch(View v, MotionEvent event) {
+                    return true;
+                }
+            });
+            rating1.setFocusable(false);
+            rating1.setRating(Float.parseFloat(array_comentarios[position].getMedia_coment()));
+
+
+            return row;
+        }
+
+    }
+
+
 
 
 }

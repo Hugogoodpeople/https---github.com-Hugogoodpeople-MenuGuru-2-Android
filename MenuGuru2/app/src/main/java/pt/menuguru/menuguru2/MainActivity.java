@@ -211,7 +211,8 @@ public class MainActivity extends Activity {
                 String jsonString = jParser.getJSONFromUrl(yourJsonStringUrl,dict);
 
                 // try parse the string to a JSON object
-                try {
+                try
+                {
                     Log.v("Ver Json ", "Ele retorna isto" + jsonString);
                     jsonObj = new JSONObject(jsonString);
                 } catch (JSONException e) {

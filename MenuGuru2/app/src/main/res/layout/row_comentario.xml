@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+    <RatingBar
+        style="@style/CustomRatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="60px"
+        android:id="@+id/row_comentario_estrela"
+        android:rating="2.5"
+        android:stepSize="0.5"
+        android:numStars="5"
+        android:layout_below="@+id/rest_nome"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Titulo"
+        android:id="@+id/comentario_titulo"
+        android:layout_below="@+id/row_comentario_estrela"
+        android:layout_alignLeft="@+id/row_comentario_estrela"
+        android:layout_alignStart="@+id/row_comentario_estrela"
+        android:textStyle="bold"
+        android:textColor="#ff333333"
+        android:textSize="17dp"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Nome user"
+        android:id="@+id/comentario_nome_user"
+        android:layout_below="@+id/comentario_titulo"
+        android:layout_alignLeft="@+id/comentario_titulo"
+        android:layout_alignStart="@+id/comentario_titulo"
+        android:layout_marginRight="5dp"
+        android:textColor="#ff333333"
+        android:textSize="13dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="data do comentario"
+        android:id="@+id/comentario_data"
+        android:layout_below="@+id/comentario_titulo"
+        android:layout_toRightOf="@+id/comentario_nome_user"
+        android:layout_toEndOf="@+id/comentario_nome_user"
+        android:textColor="#ff666666"
+        android:textSize="13dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Comentario"
+        android:id="@+id/comentario_text"
+        android:textColor="#ff333333"
+        android:layout_below="@+id/comentario_nome_user"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="15dp"
+        android:textSize="15dp" />
+
+</RelativeLayout>

@@ -12,6 +12,25 @@ public class Comentario {
     private String data_respest;
     private String nome_user_com;
     private String nome_rest_com;
+    private String titulo_comentario;
+    private String media_coment;
+
+
+    public String getMedia_coment() {
+        return media_coment;
+    }
+
+    public void setMedia_coment(String media_coment) {
+        this.media_coment = media_coment;
+    }
+
+    public String getTitulo_comentario() {
+        return titulo_comentario;
+    }
+
+    public void setTitulo_comentario(String titulo_comentario) {
+        this.titulo_comentario = titulo_comentario;
+    }
 
     public String getId_com() {
         return id_com;
