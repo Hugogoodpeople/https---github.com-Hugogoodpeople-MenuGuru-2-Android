@@ -136,6 +136,9 @@ public class PaginaRestaurante extends Activity
         // já devia ter feito isto antes
         restaurante = rest;
 
+        // para  a parte da avaliação
+
+
         new WebserviceInfo(this).execute();
         new webserviceFotos(this).execute();
         new webserviceMenusEspeciais(this).execute();
