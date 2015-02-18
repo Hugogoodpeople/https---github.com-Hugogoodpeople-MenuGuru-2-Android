@@ -24,26 +24,41 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.facebook.Request;
+import com.facebook.Response;
+import com.facebook.Session;
+import com.facebook.SessionState;
+import com.facebook.UiLifecycleHelper;
+import com.facebook.model.GraphLocation;
+import com.facebook.model.GraphUser;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import Json_parser.JSONParser;
+import Utils.Globals;
 import Utils.ImageLoader;
 import Utils.Restaurante;
-
-
+import Utils.User;
 
 
 public class MainActivity extends Activity {
 
     private double latitude;
     private double longitude;
+
+    // para os dados do utiliazador
+    public User utilizador;
 
     Restaurante[] some_array = null;
     private ProgressDialog progressDialog;
@@ -62,6 +77,21 @@ public class MainActivity extends Activity {
 
         //executarWebservice();
         incicializarGPS();
+
+
+        progressDialog = new ProgressDialog(MainActivity.this);
+        progressDialog.setCancelable(false);
+
+        if(Globals.getInstance().getUser() == null) {
+            utilizador = new User();
+        }else
+        {
+            utilizador = Globals.getInstance().getUser();
+        }
+
+
+        uiHelper = new UiLifecycleHelper(this, callback);
+        uiHelper.onCreate(savedInstanceState);
     }
 
     public void incicializarGPS()
@@ -103,18 +133,9 @@ public class MainActivity extends Activity {
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 0, locationListener);
     }
 
-    @Override
-    public void onPause()
-    {
-        super.onPause();  // Always call the superclass method first
-        locationManager.removeUpdates(locationListener);
-    }
 
-    @Override
-    public void onResume() {
-        super.onResume();  // Always call the superclass method first
-        //incicializarGPS();
-    }
+
+
 
     public void executarWebservice()
     {
@@ -182,8 +203,7 @@ public class MainActivity extends Activity {
         protected void onPreExecute()
         {
             super.onPreExecute();
-            progressDialog = new ProgressDialog(MainActivity.this);
-            progressDialog.setCancelable(false);
+
             progressDialog.setMessage("Loading...");
             progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             progressDialog.setProgress(0);
@@ -386,8 +406,359 @@ public class MainActivity extends Activity {
 
             cifroes.setText(wordtoSpan);
 
+
+            // novas esperiencias
+            final Restaurante rest = some_array[position];
+
+            final Button button = (Button)row.findViewById(R.id.add_remove_favs);
+
+
+            if (Globals.getInstance().getUser() != null)
+            if(rest_favorito(rest))
+            {
+                button.setBackground(getDrawable(R.drawable.icomark));
+
+            }
+
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    // tenho de verificar se o utilizador tem login
+                    // se sim deixo clicar senão tenho de informar que orecisa fazer login
+                    // para poder adicionar aos favoritos
+
+
+
+                    if (Globals.getInstance().getUser() != null)
+                    {
+                        // aqui tenho de adicionar este restaurantes aos favoritos
+
+
+                        if(!rest_favorito(rest))
+                        {
+                            button.setBackground(getDrawable(R.drawable.icomark));
+                            add_remove_favs(rest, true);
+                        }
+                        else
+                        {
+                            button.setBackground(getDrawable(R.drawable.icounmark));
+                            add_remove_favs(rest, false);
+                        }
+                    }
+
+                }
+            });
+
             return row;
         }
+
+    }
+
+
+    public boolean rest_favorito(Restaurante favorito)
+    {
+        Boolean coiso = false;
+
+        for (String id_rest : Globals.getInstance().getUser().getRestaurantesFav())
+        {
+            if(favorito.db_id.equals(id_rest))
+            {
+                coiso = true;
+            }
+
+        }
+
+        return coiso;
+    }
+
+    public void add_remove_favs(Restaurante rest , boolean add)
+    {
+        Log.v("favs","clicado para adicionar = " + rest.nome);
+
+        if (!add)
+        {
+            Globals.getInstance().getUser().getRestaurantesFav().remove(rest.db_id);
+            new WebserviceAddRemoveFav(this, rest, "0").execute();
+        }
+        else
+        {
+            Globals.getInstance().getUser().getRestaurantesFav().add(rest.db_id);
+            new WebserviceAddRemoveFav(this, rest, "1").execute();
+        }
+
+    }
+
+
+    // para o facebook tenho de tomar medidas drasticas
+
+    // cenas facebook necessários para salvar o login
+    private static final String TAG = "MainFragment";
+    private UiLifecycleHelper uiHelper;
+    private Session.StatusCallback callback = new Session.StatusCallback() {
+        @Override
+        public void call(Session session, SessionState state, Exception exception) {
+            onSessionStateChange(session, state, exception);
+        }
+    };
+
+    private void onSessionStateChange(Session session, SessionState state, Exception exception) {
+        if (state.isOpened()) {
+            Log.i(TAG, "Logged in...");
+
+            // aqui já tenho o login do utilizador
+
+            Request.newMeRequest(session, new Request.GraphUserCallback() {
+                // callback after Graph API response with user object
+                @Override
+                public void onCompleted(GraphUser user, Response response) {
+                    if (user != null) {
+                        Log.v("1", "user.getName : " + user.getName());
+                        Log.d("2", "user.getLastName : " + user.getLastName());
+                        Log.d("2", "user.getFirstName : " + user.getFirstName());
+                        Log.d("3", "user.getId : " + user.getId());
+                        String email = user.getProperty("email").toString();
+                        Log.d("4", "user.email : " + email);
+
+                        // tenho de chamar o webservice aqui para ir buscar as informações caso já existam na base de dados
+                        // mas primeiro tenho de preencher os dados do utilizador
+                        utilizador = new User();
+                        utilizador.setEmail(email);
+                        utilizador.setPnome(user.getFirstName());
+                        utilizador.setSnome(user.getLastName());
+                        utilizador.setId_face(user.getId());
+
+                        chamarWSLogin();
+
+                    }
+                }
+            }).executeAsync();
+
+
+        } else if (state.isClosed()) {
+            Log.i(TAG, "Logged out...");
+        }
+    }
+
+    public void chamarWSLogin()
+    {
+        new WebserviceLoginFacebook(this).execute();
+    }
+
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        uiHelper.onResume();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        uiHelper.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        uiHelper.onPause();
+        locationManager.removeUpdates(locationListener);
+    }
+
+    // parte onde se realiza o pedido e a receção dos webservices
+    // you can make this class as another java file so it will be separated from your main activity.
+    public class WebserviceLoginFacebook extends AsyncTask<String, String, String> {
+
+        final String TAG = "AsyncTaskParseJson.java";
+
+
+        String yourJsonStringUrl = "http://menuguru.pt/menuguru2/json_login_facebook.php";
+
+        // contacts JSONArray
+        JSONArray dataJsonArr = null;
+
+        private MainActivity delegate;
+
+        public WebserviceLoginFacebook (MainActivity delegate){
+            this.delegate = delegate;
+        }
+
+        @Override
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
+
+            progressDialog.setMessage("Loading...");
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.setProgress(0);
+            progressDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... arg0) {
+
+            try {
+
+                // instantiate our json parser
+                JSONParser jParser = new JSONParser();
+
+                // get json string from url
+                // tenho de criar um jsonobject e adicionar la as cenas
+                JSONObject dict = new JSONObject();
+                JSONObject jsonObj = new JSONObject();
+
+                //dict.put("lang","pt");
+
+                dict.put("face_id",utilizador.id_face);
+                dict.put("mail",utilizador.email);
+                dict.put("name",utilizador.pnome);
+                dict.put("last_name",utilizador.snome);
+                dict.put("versao","facebook Android");
+
+
+
+
+                String jsonString = jParser.getJSONFromUrl(yourJsonStringUrl,dict);
+
+                // try parse the string to a JSON object
+                try {
+                    Log.v("Ver Json ", "Ele retorna do facebook login" + jsonString);
+                    jsonObj = new JSONObject(jsonString);
+                } catch (JSONException e) {
+                    Log.e(TAG, "Error parsing data " + e.toString());
+                }
+                // get the array of users
+
+                dataJsonArr = jsonObj.getJSONObject("res").getJSONArray("favoritos");
+                // loop through all users
+
+
+                // tenho de ir buscar tudo aqui
+                utilizador.setUserid(jsonObj.getJSONObject("res").getString("id_user"));
+                utilizador.setPnome(jsonObj.getJSONObject("res").getString("nome"));
+                utilizador.setSnome(jsonObj.getJSONObject("res").getString("sobrenome"));
+                utilizador.setPass(jsonObj.getJSONObject("res").getString("senha"));
+                utilizador.setPontos(jsonObj.getJSONObject("res").getString("pontos"));
+                utilizador.setTelefone_user(jsonObj.getJSONObject("res").getString("telefone"));
+                utilizador.setPedido(jsonObj.getJSONObject("res").getString("pedido"));
+                utilizador.setCidade(jsonObj.getJSONObject("res").getString("cidade"));
+
+
+                List<String> restaurantesFavs = new ArrayList<>();
+
+                for (int i = 0; i < dataJsonArr.length(); i++)
+                {
+
+                    JSONObject c = dataJsonArr.getJSONObject(i);
+
+                    String info     = c.getString("id_rest");
+
+                    restaurantesFavs.add(info);
+
+                }
+
+                utilizador.setRestaurantesFav(restaurantesFavs);
+
+                Globals.getInstance().setUser(utilizador);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String strFromDoInBg){  progressDialog.dismiss();delegate.asyncCompleteLoginFace(true);  }
+
+    }
+
+    public void asyncCompleteLoginFace(Boolean success)
+    {
+        // faz coisas aqui com o login acabado de realizar
+
+    }
+
+
+    // webservice para adicionar e remover favoritos associado a um utilizador
+    public class WebserviceAddRemoveFav extends AsyncTask<String, String, String> {
+
+        final String TAG = "AsyncTaskParseJson.java";
+
+
+        String yourJsonStringUrl = "http://menuguru.pt/menuguru2/json_adicionar_remover_favorito.php";
+
+        // contacts JSONArray
+        JSONArray dataJsonArr = null;
+
+        private MainActivity delegate;
+        private Restaurante restaurante;
+        private String add;
+
+        public WebserviceAddRemoveFav (MainActivity delegate, Restaurante restaurante, String add){
+            this.delegate = delegate;
+            this.restaurante = restaurante;
+            this.add = add;
+        }
+
+        @Override
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
+
+            // é tao rapido que nem preciso disto para nada
+            /*
+            progressDialog.setMessage("Loading...");
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.setProgress(0);
+            progressDialog.show();
+            */
+        }
+
+        @Override
+        protected String doInBackground(String... arg0) {
+
+            try {
+
+                // instantiate our json parser
+                JSONParser jParser = new JSONParser();
+
+                // get json string from url
+                // tenho de criar um jsonobject e adicionar la as cenas
+                JSONObject dict = new JSONObject();
+                JSONObject jsonObj = new JSONObject();
+
+                //dict.put("lang","pt");
+
+                dict.put("id_user",utilizador.userid);
+                dict.put("id_rest", this.restaurante.db_id);
+                dict.put("aux", this.add);
+
+
+
+                String jsonString = jParser.getJSONFromUrl(yourJsonStringUrl,dict);
+
+                // try parse the string to a JSON object
+                try {
+                    Log.v("Ver Json ", "Ele retorna de adicionar favoritos " + jsonString);
+                    jsonObj = new JSONObject(jsonString);
+                } catch (JSONException e) {
+                    Log.e(TAG, "Error parsing data " + e.toString());
+                }
+                // get the array of users
+
+               // depois das cenas estarem feitas nao estou a espera que nada de especial aconteça
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String strFromDoInBg){  progressDialog.dismiss();  }
 
     }
 

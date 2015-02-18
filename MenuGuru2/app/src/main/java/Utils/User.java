@@ -1,5 +1,7 @@
 package Utils;
 
+import java.util.List;
+
 /**
  * Created by user on 10/09/14.
  */
@@ -16,7 +18,33 @@ public class User {
     public String pass = "";
     public String tipoconta = "";
     public Boolean news = true;
+    public String pontos = "";
+    public String pedido = "";
+    public List<String> restaurantesFav;
 
+    public List<String> getRestaurantesFav() {
+        return restaurantesFav;
+    }
+
+    public void setRestaurantesFav(List<String> restaurantesFav) {
+        this.restaurantesFav = restaurantesFav;
+    }
+
+    public String getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(String pedido) {
+        this.pedido = pedido;
+    }
+
+    public String getPontos() {
+        return pontos;
+    }
+
+    public void setPontos(String pontos) {
+        this.pontos = pontos;
+    }
 
     public String getId_face() { return id_face;  }
 

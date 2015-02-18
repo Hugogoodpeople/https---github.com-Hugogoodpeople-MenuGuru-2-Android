@@ -836,7 +836,7 @@ public class PaginaRestaurante extends Activity
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             //return super.getView(position, convertView, parent);
 
             LayoutInflater inflater =(LayoutInflater)myContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -874,8 +874,5 @@ public class PaginaRestaurante extends Activity
         }
 
     }
-
-
-
 
 }

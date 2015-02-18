@@ -11,24 +11,54 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" Entrar com o Menu Guru"
-        android:id="@+id/button"
+        android:id="@+id/login_normal"
         android:layout_alignParentTop="true"
+        android:background="#ffd53530"
+        android:layout_marginBottom="5dp"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:textSize="17dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp" />
+        android:layout_alignParentStart="true" />
+
+    <com.facebook.widget.LoginButton
+        android:id="@+id/authButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/login_normal"
+        android:layout_alignLeft="@+id/login_normal"
+        android:layout_alignStart="@+id/login_normal"
+        android:layout_alignRight="@+id/login_normal"
+        android:layout_alignEnd="@+id/login_normal" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" Entrar com o Facebook"
-        android:id="@+id/button2"
-        android:layout_marginTop="26dp"
-        android:layout_below="@+id/button"
-        android:layout_alignRight="@+id/button"
-        android:layout_alignEnd="@+id/button"
-        android:layout_alignLeft="@+id/button"
-        android:layout_alignStart="@+id/button" />
+        android:text="Criar Conta"
+        android:id="@+id/login_criar_conta"
+        android:background="#ff29384a"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:textSize="17dp"
+        android:layout_below="@+id/authButton"
+        android:layout_marginTop="53dp"
+        android:layout_alignLeft="@+id/authButton"
+        android:layout_alignStart="@+id/authButton"
+        android:layout_alignRight="@+id/authButton"
+        android:layout_alignEnd="@+id/authButton" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sobre a Menu Guru"
+        android:id="@+id/button3"
+        android:background="@android:color/transparent"
+        android:textColor="#ff818181"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+
 </RelativeLayout>

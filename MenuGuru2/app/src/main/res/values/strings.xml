@@ -8,4 +8,7 @@
     <string name="title_activity_login">Login</string>
     <string name="title_activity_login_normal">LoginNormal</string>
 
+    <string name="facebook_app_id">407895952712985</string>
+
+
 </resources>

@@ -1,12 +1,13 @@
 package pt.menuguru.menuguru2;
 
+import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class LoginNormal extends ActionBarActivity {
+public class LoginNormal extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
