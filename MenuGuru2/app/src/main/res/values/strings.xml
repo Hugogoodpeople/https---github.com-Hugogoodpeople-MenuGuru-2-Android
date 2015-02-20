@@ -6,9 +6,8 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_pagina_restaurante">PaginaRestaurante</string>
     <string name="title_activity_login">Login</string>
-    <string name="title_activity_login_normal">LoginNormal</string>
-
+    <string name="title_activity_login_normal">Voltar</string>
     <string name="facebook_app_id">407895952712985</string>
-
+    <string name="title_activity_pagina_pessoal">Perfil</string>
 
 </resources>

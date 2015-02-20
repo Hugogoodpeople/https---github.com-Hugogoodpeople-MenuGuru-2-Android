@@ -152,7 +152,10 @@
             android:layout_alignParentEnd="true"
             android:background="@drawable/icounmark"
             android:layout_marginTop="15dp"
-            android:layout_marginRight="15dp" />
+            android:layout_marginRight="15dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"/>
 
 
     </RelativeLayout>

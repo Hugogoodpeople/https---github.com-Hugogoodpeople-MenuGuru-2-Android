@@ -172,8 +172,20 @@ public class MainActivity extends Activity {
 
         if (id == R.id.action_settings) {
 
-            Intent myIntent = new Intent(this, Login.class);
-            startActivity(myIntent);
+            if (Globals.getInstance().getUser() != null)
+            {
+
+                // é aqui que tenho de abrir os restaurantes
+                Intent intent = new Intent(this, pagina_pessoal.class);
+
+                startActivity(intent);
+
+            }
+            else {
+
+                Intent myIntent = new Intent(this, Login.class);
+                startActivity(myIntent);
+            }
 
             return true;
         }
@@ -337,11 +349,13 @@ public class MainActivity extends Activity {
 
     public void abrirRestaurante(Restaurante restaurante)
     {
-        // é aqui que tenho de abrir os restaurantes
-        Intent intent = new Intent(this, PaginaRestaurante.class);
-        intent.putExtra("restaurante", restaurante);
 
-        startActivity(intent);
+            // é aqui que tenho de abrir os restaurantes
+            Intent intent = new Intent(this, PaginaRestaurante.class);
+            intent.putExtra("restaurante", restaurante);
+
+            startActivity(intent);
+
     }
 
     public class MyListAdapter extends ArrayAdapter<Restaurante> {
@@ -410,6 +424,7 @@ public class MainActivity extends Activity {
             // novas esperiencias
             final Restaurante rest = some_array[position];
 
+
             final Button button = (Button)row.findViewById(R.id.add_remove_favs);
 
 
@@ -449,6 +464,7 @@ public class MainActivity extends Activity {
 
                 }
             });
+
 
             return row;
         }

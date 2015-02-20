@@ -16,7 +16,8 @@
         android:layout_alignTop="@+id/empty_list_main"
         android:dividerHeight="0dp"
         android:divider="@null"
-        android:background="#ffe1e0e1" />
+        android:background="#ffe1e0e1"
+        />
 
     <TextView
         android:id="@+id/empty_list_main"

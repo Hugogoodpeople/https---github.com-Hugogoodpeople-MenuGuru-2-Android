@@ -298,7 +298,7 @@ public class Login extends Activity {
     public void asyncCompleteInfo(Boolean success)
     {
         // faz coisas aqui com o login acabado de realizar
-
+        finish();
 
     }
 }
