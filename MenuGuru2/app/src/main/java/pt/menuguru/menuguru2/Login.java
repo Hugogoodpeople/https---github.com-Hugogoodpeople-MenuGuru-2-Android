@@ -172,6 +172,11 @@ public class Login extends Activity {
     public void onResume() {
         super.onResume();
         uiHelper.onResume();
+        User utilizador = Globals.getInstance().getUser();
+        if(utilizador != null)
+        {
+            finish();
+        }
     }
 
     @Override
@@ -299,6 +304,7 @@ public class Login extends Activity {
     {
         // faz coisas aqui com o login acabado de realizar
         finish();
-
     }
+
+
 }
